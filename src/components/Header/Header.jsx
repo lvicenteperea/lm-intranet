@@ -9,7 +9,7 @@ const Header = ({ user, onLogout }) => {
     <div className="header">
       <div className="logo">
         <a href="https://tu-logo.com" target="_blank" rel="noopener noreferrer">
-          <img src="logo.png" alt="Logo" />
+          <img src="logo.png"/>
         </a>
       </div>
       <div className="user-menu">

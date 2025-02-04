@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { sincronizaTodo } from '../../services/api';
-import './Dashboard.css';
+import './SincronizaTodo.css';
 
-const Dashboard = () => {
+const SincronizaTodo = () => {
   const [fileName, setFileName] = useState('');
   const [date, setDate] = useState('');
   const [message, setMessage] = useState(null);
@@ -20,7 +20,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard-container">
+    <div className="SincronizaTodo-container">
       <h2>Sincronización de Datos</h2>
       <form onSubmit={handleSubmit}>
         <label>Nombre del fichero:</label>
@@ -49,4 +49,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default SincronizaTodo;

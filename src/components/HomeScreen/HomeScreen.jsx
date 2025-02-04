@@ -40,7 +40,7 @@
 
 
 import React, { useState } from 'react';
-import Dashboard from '../Dashboard/Dashboard';
+import SincronizaTodo from '../SincronizaTodo/SincronizaTodo';
 import './HomeScreen.css';
 
 const HomeScreen = ({ user, onLogout }) => {
@@ -75,7 +75,7 @@ const HomeScreen = ({ user, onLogout }) => {
         </nav>
         
         <section className="content-area">
-          {selectedOption === "openSincronizaTodo" ? <Dashboard /> : <p>Selecciona una opción del menú</p>}
+          {selectedOption === "openSincronizaTodo" ? <SincronizaTodo /> : <p>Selecciona una opción del menú</p>}
         </section>
       </div>
     </div>
