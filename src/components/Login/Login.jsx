@@ -3,8 +3,8 @@ import { login } from '../../services/api';
 import './Login.css';
 
 const Login = ({ onLoginSuccess, onForgotPassword }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('luis');
+  const [password, setPassword] = useState('mi_contraseña_segura');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false); // Estado para controlar el mensaje de carga
 
@@ -16,14 +16,17 @@ const Login = ({ onLoginSuccess, onForgotPassword }) => {
     try {
       const data = await login(username, password);
       setLoading(false); // Ocultar el mensaje de carga
-
+      
+      console.error("Vamos a ver data:", data);
+      
       if (data.success) {
         onLoginSuccess(data.user);
       } else {
         setError(data.message);
       }
     } catch (err) {
-      setError('Error al conectar con el servidor');
+      console.error("Vamos a ver:error", err);
+      setError('Error al conectar con el servidor 1');
       setLoading(false);
     }
   };

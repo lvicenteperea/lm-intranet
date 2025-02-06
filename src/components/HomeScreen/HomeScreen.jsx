@@ -1,18 +1,17 @@
-// import React, { useState, useEffect } from 'react';
+// import React, { useState } from 'react';
+// import SincronizaTodo from '../SincronizaTodo/SincronizaTodo';
 // import './HomeScreen.css';
 
-// const HomeScreen = ({ user, options, onLogout }) => {
+// const HomeScreen = ({ user, onLogout }) => {
+//   const [selectedOption, setSelectedOption] = useState(null);
+
 //   return (
 //     <div className="home-container">
 //       {/* Encabezado */}
 //       <header className="header">
 //         <img src="/logo.png" alt="Logo" className="logo" />
 //         <div className="user-menu">
-//           <img
-//             src={user.image}
-//             alt="Usuario"
-//             className="user-avatar"
-//           />
+//           <img src={user.image} alt="Usuario" className="user-avatar" />
 //           <div className="user-info">
 //             <p>{user.name}</p>
 //             <button onClick={onLogout} className="logout-button">Cerrar sesión</button>
@@ -23,13 +22,19 @@
 //       {/* Contenido principal */}
 //       <div className="main-content">
 //         <nav className="menu">
-//           {options.map((option, index) => (
-//             <button key={index} className="menu-item">{option.text}</button>
+//           {user.options.map((option, index) => (  // 🔹 Usamos user.options aquí
+//             <button 
+//               key={index} 
+//               className="menu-item" 
+//               onClick={() => setSelectedOption(option.action)}
+//             >
+//               {option.text}
+//             </button>
 //           ))}
 //         </nav>
+        
 //         <section className="content-area">
-//           <h2>Bienvenido, {user.name}</h2>
-//           <p>Selecciona una opción del menú para comenzar.</p>
+//           {selectedOption === "openSincronizaTodo" ? <SincronizaTodo /> : <p>Selecciona una opción del menú</p>}
 //         </section>
 //       </div>
 //     </div>
@@ -40,11 +45,16 @@
 
 
 import React, { useState } from 'react';
-import SincronizaTodo from '../SincronizaTodo/SincronizaTodo';
+import Dashboard from '../SincronizaTodo/SincronizaTodo';
 import './HomeScreen.css';
 
 const HomeScreen = ({ user, onLogout }) => {
   const [selectedOption, setSelectedOption] = useState(null);
+
+  // ✅ Evitar errores si `user` es `undefined` o `null`
+  if (!user) {
+    return <p>Cargando usuario...</p>;
+  }
 
   return (
     <div className="home-container">
@@ -52,9 +62,9 @@ const HomeScreen = ({ user, onLogout }) => {
       <header className="header">
         <img src="/logo.png" alt="Logo" className="logo" />
         <div className="user-menu">
-          <img src={user.image} alt="Usuario" className="user-avatar" />
+          <img src="https://via.placeholder.com/40" alt="Usuario" className="user-avatar" />
           <div className="user-info">
-            <p>{user.name}</p>
+            <p>{user?.name || "Usuario desconocido"} ({user?.ret_txt || "Sin mensaje"})</p> 
             <button onClick={onLogout} className="logout-button">Cerrar sesión</button>
           </div>
         </div>
@@ -63,7 +73,7 @@ const HomeScreen = ({ user, onLogout }) => {
       {/* Contenido principal */}
       <div className="main-content">
         <nav className="menu">
-          {user.options.map((option, index) => (  // 🔹 Usamos user.options aquí
+          {user.options?.map((option, index) => (
             <button 
               key={index} 
               className="menu-item" 
@@ -75,7 +85,7 @@ const HomeScreen = ({ user, onLogout }) => {
         </nav>
         
         <section className="content-area">
-          {selectedOption === "openSincronizaTodo" ? <SincronizaTodo /> : <p>Selecciona una opción del menú</p>}
+          {selectedOption === "openSincronizaTodo" ? <Dashboard /> : <p>Selecciona una opción del menú</p>}
         </section>
       </div>
     </div>

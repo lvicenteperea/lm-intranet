@@ -15,7 +15,7 @@ const ForgotPassword = ({ onClose }) => {
       const data = await forgotPassword(email);
       setMessage(data.message);
     } catch (err) {
-      setMessage('Error al conectar con el servidor');
+      setMessage('Error al conectar con el servidor 2');
     }
   };
 
