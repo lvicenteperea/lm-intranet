@@ -2,3 +2,4 @@
 export * from './authService';  // 🔹 Esto incluirá `forgotPassword`
 export * from './userService';
 export * from './syncService';
+export * from './consultaService';

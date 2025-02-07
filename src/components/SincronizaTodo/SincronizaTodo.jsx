@@ -1,50 +1,67 @@
-import React, { useState } from 'react';
-import { sincronizaTodo } from '../../services/api';
+import React, { useState } from "react";
 import './SincronizaTodo.css';
 
 const SincronizaTodo = () => {
-  const [fileName, setFileName] = useState('');
-  const [date, setDate] = useState('');
-  const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage(null);
-
-    const response = await sincronizaTodo(fileName, date);
+  const handleSincronizar = async () => {
+    const confirmacion = window.confirm("¿Estás seguro de que deseas ejecutar la sincronización?");
     
+    if (!confirmacion) {
+      return; // Si el usuario cancela, no hace nada
+    }
+
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const token = localStorage.getItem("token"); // Obtener token JWT
+      if (!token) {
+        setMessage("❌ No estás autenticado. Inicia sesión primero.");
+        setLoading(false);
+        return;
+      }
+
+      const response = await fetch("http://localhost:8000/mallorquina/mll_sincroniza?id_App=1&user=usuario_dev&ret_code=0&ret_txt=Ok", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      });
+
+      console.log("📡 Respuesta recibida:", response);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Error HTTP ${response.status}: ${errorText}`);
+      }
+
+      const data = await response.json();
+      console.log("📡 Datos del servidor:", data);
+
+      if (data.ret_code === 0) {
+        setMessage(`✅ Sincronización exitosa: ${data.ret_txt} - ${data.resultados}`);
+      } else {
+        setMessage(`❌ Error en la sincronización: ${data.ret_txt}`);
+      }
+
+    } catch (error) {
+      console.error("❌ Error al ejecutar la sincronización:", error);
+      setMessage("❌ Error al conectar con el servidor.");
+    }
+
     setLoading(false);
-    setMessage(response.message);
   };
 
   return (
-    <div className="SincronizaTodo-container">
-      <h2>Sincronización de Datos</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Nombre del fichero:</label>
-        <input 
-          type="text" 
-          value={fileName} 
-          onChange={(e) => setFileName(e.target.value)} 
-          required 
-        />
-
-        <label>Fecha:</label>
-        <input 
-          type="date" 
-          value={date} 
-          onChange={(e) => setDate(e.target.value)} 
-          required 
-        />
-
-        <button type="submit" disabled={loading}>
-          {loading ? "Procesando..." : "Ejecutar Sincronización"}
-        </button>
-      </form>
-
-      {message && <p className={message.includes("correcto") ? "success" : "error"}>{message}</p>}
+    <div>
+      <h1>Sincronización de Datos</h1>
+      <button onClick={handleSincronizar} disabled={loading}>
+        {loading ? "Sincronizando..." : "Ejecutar Sincronización"}
+      </button>
+      {message && <p>{message}</p>}
     </div>
   );
 };

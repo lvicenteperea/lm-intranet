@@ -15,7 +15,6 @@ const Header = ({ user, onLogout }) => {
       <div className="user-menu">
         <img
           src={user.image}
-          alt="Usuario"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         />
         {isMenuOpen && (

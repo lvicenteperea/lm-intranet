@@ -1,0 +1,58 @@
+.consultas-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+  
+  input[type="date"] {
+    margin: 10px;
+    padding: 5px;
+  }
+  
+  button {
+    padding: 8px 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .resultados-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .resultados-table th, .resultados-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .resultados-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .consultas-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .consultas-table th, .consultas-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  .consultas-table .align-left {
+    text-align: left; /* ✅ Alinea Puesto Facturación a la izquierda */
+  }

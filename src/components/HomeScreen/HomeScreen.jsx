@@ -1,51 +1,8 @@
-// import React, { useState } from 'react';
-// import SincronizaTodo from '../SincronizaTodo/SincronizaTodo';
-// import './HomeScreen.css';
-
-// const HomeScreen = ({ user, onLogout }) => {
-//   const [selectedOption, setSelectedOption] = useState(null);
-
-//   return (
-//     <div className="home-container">
-//       {/* Encabezado */}
-//       <header className="header">
-//         <img src="/logo.png" alt="Logo" className="logo" />
-//         <div className="user-menu">
-//           <img src={user.image} alt="Usuario" className="user-avatar" />
-//           <div className="user-info">
-//             <p>{user.name}</p>
-//             <button onClick={onLogout} className="logout-button">Cerrar sesión</button>
-//           </div>
-//         </div>
-//       </header>
-
-//       {/* Contenido principal */}
-//       <div className="main-content">
-//         <nav className="menu">
-//           {user.options.map((option, index) => (  // 🔹 Usamos user.options aquí
-//             <button 
-//               key={index} 
-//               className="menu-item" 
-//               onClick={() => setSelectedOption(option.action)}
-//             >
-//               {option.text}
-//             </button>
-//           ))}
-//         </nav>
-        
-//         <section className="content-area">
-//           {selectedOption === "openSincronizaTodo" ? <SincronizaTodo /> : <p>Selecciona una opción del menú</p>}
-//         </section>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default HomeScreen;
-
-
 import React, { useState } from 'react';
 import Dashboard from '../SincronizaTodo/SincronizaTodo';
+import Dashboard2 from '../SincronizaTodo2/SincronizaTodo2';
+import CargaProdERP from '../CargaProdERP/CargaProdERP';
+import Consultas from '../Consultas/Consultas'; // consultas
 import './HomeScreen.css';
 
 const HomeScreen = ({ user, onLogout }) => {
@@ -55,6 +12,23 @@ const HomeScreen = ({ user, onLogout }) => {
   if (!user) {
     return <p>Cargando usuario...</p>;
   }
+
+  const renderContent = () => {
+    if (selectedOption === "openSincronizaTodo") {
+      return <Dashboard />;
+    } else if (selectedOption === "openSincronizaTodo2") {
+      return <Dashboard2 />;
+    } else if (selectedOption === "openCargaProdErp") {
+      return <CargaProdERP />;
+    } else if (selectedOption === "openConsultaCierre") {
+      return <Consultas />;
+    } else {
+      return (<div>
+              <h1>Bienvenido</h1> 
+              <p>Selecciona una opción del menú</p>
+              </div>);
+    }
+  };
 
   return (
     <div className="home-container">
@@ -84,9 +58,14 @@ const HomeScreen = ({ user, onLogout }) => {
           ))}
         </nav>
         
-        <section className="content-area">
-          {selectedOption === "openSincronizaTodo" ? <Dashboard /> : <p>Selecciona una opción del menú</p>}
-        </section>
+        <div>
+          {renderContent()} {/* Renderiza el contenido dinámico */}
+        </div>
+
+        {/* <section className="content-area">
+        {selectedOption === "openSincronizaTodo" ? <Dashboard /> : <p>Selecciona una opción del menú</p>}
+        {selectedOption === "openSincronizaTodo2" ? <Dashboard2 /> : <p>Selecciona una opción del menú2</p>}
+        </section> */}
       </div>
     </div>
   );
