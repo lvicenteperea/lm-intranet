@@ -3,6 +3,8 @@ import Dashboard from '../SincronizaTodo/SincronizaTodo';
 import Dashboard2 from '../SincronizaTodo2/SincronizaTodo2';
 import CargaProdERP from '../CargaProdERP/CargaProdERP';
 import Consultas from '../Consultas/Consultas'; // consultas
+import ArqueoCaja from '../arqueoCaja/ArqueoCaja'; 
+import ArqueoCajaInf from '../ArqueoCajaInf/arqueoCajaInf';
 import './HomeScreen.css';
 
 const HomeScreen = ({ user, onLogout }) => {
@@ -22,6 +24,10 @@ const HomeScreen = ({ user, onLogout }) => {
       return <CargaProdERP />;
     } else if (selectedOption === "openConsultaCierre") {
       return <Consultas />;
+    } else if (selectedOption === "openArqueoCaja") {
+      return <ArqueoCaja />;
+    } else if (selectedOption === "openArqueoCajaInf") {
+      return <ArqueoCajaInf />;
     } else {
       return (<div>
               <h1>Bienvenido</h1> 
@@ -29,6 +35,9 @@ const HomeScreen = ({ user, onLogout }) => {
               </div>);
     }
   };
+
+  
+
 
   return (
     <div className="home-container">
