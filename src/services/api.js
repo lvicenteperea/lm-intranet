@@ -4,3 +4,5 @@ export * from './userService';
 export * from './syncService';
 export * from './consultaService';
 export * from './arqueoCajaService';
+export * from './convierteTarifasService';
+export * from './fichasTecnicasService';

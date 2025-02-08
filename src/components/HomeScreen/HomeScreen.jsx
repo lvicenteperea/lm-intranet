@@ -5,6 +5,9 @@ import CargaProdERP from '../CargaProdERP/CargaProdERP';
 import Consultas from '../Consultas/Consultas'; // consultas
 import ArqueoCaja from '../arqueoCaja/ArqueoCaja'; 
 import ArqueoCajaInf from '../ArqueoCajaInf/arqueoCajaInf';
+import ConvierteTarifas from '../ConvierteTarifas/ConvierteTarifas';
+import FichasTecnicas from '../FichasTecnicas/FichasTecnicas';
+
 import './HomeScreen.css';
 
 const HomeScreen = ({ user, onLogout }) => {
@@ -28,6 +31,10 @@ const HomeScreen = ({ user, onLogout }) => {
       return <ArqueoCaja />;
     } else if (selectedOption === "openArqueoCajaInf") {
       return <ArqueoCajaInf />;
+    } else if (selectedOption === "openConvierteTarifas") {
+      return <ConvierteTarifas />;
+    } else if (selectedOption === "openFichasTecnicas") {
+      return <FichasTecnicas />;
     } else {
       return (<div>
               <h1>Bienvenido</h1> 
@@ -37,7 +44,7 @@ const HomeScreen = ({ user, onLogout }) => {
   };
 
   
-
+  
 
   return (
     <div className="home-container">
