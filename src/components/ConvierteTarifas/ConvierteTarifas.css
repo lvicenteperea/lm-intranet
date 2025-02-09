@@ -82,3 +82,18 @@
   text-decoration: underline;
   color: #d6788a;
 }
+
+.download-btn {
+  background-color: #f89aba;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.download-btn:hover {
+  background-color: #d6788a;
+}
