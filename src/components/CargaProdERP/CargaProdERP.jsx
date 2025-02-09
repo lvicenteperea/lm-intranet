@@ -82,7 +82,7 @@ const CargaProdERP = () => {
   };
 
   return (
-    <div>
+    <div className="CargaProdERP-container">
       <h1>Carga de Productos desde ERP</h1>
 
       <label>Selecciona un archivo:</label>

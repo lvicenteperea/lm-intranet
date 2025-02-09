@@ -1,0 +1,23 @@
+  .menu {
+    width: 250px;
+    background: #343a40;
+    padding: 15px;
+    height: 100vh; /* Para ocupar toda la altura */
+    color: white;
+  }
+  
+  .menu button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #F89ABA;
+    color: white;
+    border: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .menu button:hover {
+    background-color: #6c757d;
+  }
+  

@@ -1,0 +1,85 @@
+/* Contenedor de la cabecera */
+.header {
+  width: 100%;
+  max-width: 1024px; /* 🔹 No crecerá más allá de 1024px */
+  min-width: 830px;  /* 🔹 Se mantiene en 830px mínimo */
+  height: 70px;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin: 10px auto 0 auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1002;
+}
+
+/* Para asegurar que la cabecera no se vea afectada por el menú */
+@media (max-width: 830px) {
+  .header {
+    min-width: 100%; /* 🔹 Cuando la pantalla es más pequeña, la cabecera ocupa el 100% */
+  }
+}
+
+/* Contenedor del logo */
+.logo img {
+  max-height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Menú de usuario */
+.user-menu {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Imagen del usuario */
+.user-avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Nombre del usuario */
+.username {
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Estilos del menú desplegable con diseño plano */
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  width: 150px;
+}
+
+/* Opción del menú */
+.dropdown-menu div {
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+  text-align: left;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Efecto hover en cada opción */
+.dropdown-menu div:hover {
+  background: #f89aba;
+  color: white;
+  border-radius: 3px;
+}

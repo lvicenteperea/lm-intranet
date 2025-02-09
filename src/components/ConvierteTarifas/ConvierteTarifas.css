@@ -1,9 +1,12 @@
 .convierte-container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    text-align: center;
-  }
+  min-width: 600px;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
   
   button {
     padding: 10px 15px;
@@ -35,3 +38,47 @@
     font-weight: bold;
   }
   
+  /* Contenedor principal de los resultados */
+.resultados-list {
+  list-style: none; /* ❌ Quita los puntos de la lista */
+  padding: 0;
+  margin-top: 20px;
+  background: #f9f9f9; /* 🎨 Fondo claro para mejor lectura */
+  border-radius: 8px;
+  overflow: hidden; /* ✅ Bordes redondeados aplicados correctamente */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 🏆 Pequeña sombra para resaltar */
+}
+
+/* Estilo de cada fila */
+.resultados-list li {
+  padding: 15px;
+  border-bottom: 1px solid #ddd; /* 🔹 Separación entre elementos */
+  display: flex;
+  flex-direction: column; /* 📏 Organiza los textos en columna */
+  align-items: flex-start; /* 🔹 Alinea los textos a la izquierda */
+}
+
+/* Último elemento sin borde inferior */
+.resultados-list li:last-child {
+  border-bottom: none;
+}
+
+/* Nombre del archivo en negrita */
+.resultados-list li span {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Enlace de descarga */
+.resultados-list a {
+  color: #f89aba; /* 🔹 Color del botón (el mismo de los demás) */
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* Cambia el color del enlace al pasar el ratón */
+.resultados-list a:hover {
+  text-decoration: underline;
+  color: #d6788a;
+}

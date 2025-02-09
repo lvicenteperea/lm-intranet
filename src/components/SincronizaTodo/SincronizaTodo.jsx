@@ -56,7 +56,7 @@ const SincronizaTodo = () => {
   };
 
   return (
-    <div>
+    <div className="SincronizaTodo-container">
       <h1>Sincronización de Datos</h1>
       <button onClick={handleSincronizar} disabled={loading}>
         {loading ? "Sincronizando..." : "Ejecutar Sincronización"}

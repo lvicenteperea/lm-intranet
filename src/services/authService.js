@@ -4,17 +4,17 @@
 // ---------------------------------------------------------------------
 
 // Función para verificar si localStorage está disponible
-const isStorageAvailable = (type) => {
-  try {
-    const storage = window[type];
-    const testKey = "__test__";
-    storage.setItem(testKey, "1");
-    storage.removeItem(testKey);
-    return true;
-  } catch (error) {
-    return false;
-  }
-};
+// const isStorageAvailable = (type) => {
+//   try {
+//     const storage = window[type];
+//     const testKey = "__test__";
+//     storage.setItem(testKey, "1");
+//     storage.removeItem(testKey);
+//     return true;
+//   } catch (error) {
+//     return false;
+//   }
+// };
 
 
 export const login = async (username, password) => {
@@ -72,6 +72,9 @@ export const login = async (username, password) => {
       user: {
         id: data.user.id,
         name: data.user.username,
+        email: data.user.email,
+        dpto: data.user.dpto,
+        img: data.user.img,
         ret_code: data.ret_code,
         ret_txt: data.ret_txt,
         options: data.options

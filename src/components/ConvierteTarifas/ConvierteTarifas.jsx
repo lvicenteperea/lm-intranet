@@ -31,15 +31,18 @@ const ConvierteTarifas = () => {
       {loading && <p>Cargando datos...</p>}
       {error && <p className="error">{error}</p>}
 
-      <div className="resultados-list">
+      <ul className="resultados-list">
         {resultados.length > 0 ? (
           resultados.map((item, index) => (
-            <p key={index}>{item}</p> // ✅ Mostramos cada línea de respuesta
+            <li key={index}> 
+              <a href={item.link} target="_blank" rel="noopener noreferrer"> 🔗 </a>
+              <span>{item.texto}</span> 
+            </li>
           ))
         ) : (
           <p>No hay datos disponibles.</p>
         )}
-      </div>
+      </ul>
     </div>
   );
 };

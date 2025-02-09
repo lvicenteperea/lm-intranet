@@ -1,30 +1,50 @@
-// src/components/Header/Header.jsx
-import React, { useState } from 'react';
-import './Header.css';
+import React, { useState } from "react";
+import "./Header.css";
+import userDefaultImage from "../../assets/images/user-default.png";
+import logo from "../../assets/images/logo.png"
 
-const Header = ({ user, onLogout }) => {
+
+const Header = ({ user, onLogout, onShowUserInfo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Obtener la imagen del usuario o la predeterminada
+  const userImage = user?.img ? require(`../../assets/images/${user.img}`) : userDefaultImage;
+
   return (
-    <div className="header">
+    <header className="header">
+      {/* Logo */}
       <div className="logo">
-        <a href="https://tu-logo.com" target="_blank" rel="noopener noreferrer">
-          <img src="logo.png"/>
+        <a href="https://pastelerialamallorquina.es/" target="_blank" rel="noopener noreferrer">
+          <img src={logo} alt="Logo" />
         </a>
       </div>
+
+      {/* Menú de usuario */}
       <div className="user-menu">
+        {/* Imagen del usuario */}
         <img
-          src={user.image}
+          src={userImage}
+          alt="Usuario"
+          className="user-avatar"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         />
+
+        {/* Nombre del usuario con menú desplegable */}
+        <div className="user-info">
+          <p className="username" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {user?.username || "Usuario"}
+          </p>
+        </div>
+
+        {/* Menú desplegable */}
         {isMenuOpen && (
           <div className="dropdown-menu">
-            <button onClick={() => alert('Mostrar mis datos')}>Mis datos</button>
+            <button onClick={onShowUserInfo}>Mis Datos</button>
             <button onClick={onLogout}>Cerrar sesión</button>
           </div>
         )}
       </div>
-    </div>
+    </header>
   );
 };
 

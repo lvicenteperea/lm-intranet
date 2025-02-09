@@ -1,98 +1,114 @@
 /* Contenedor principal */
 .home-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: #f5f5f5;
-  }
-  
-  /* Encabezado */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Logo */
-  .logo {
-    height: 50px;
-  }
-  
-  /* Usuario */
-  .user-menu {
-    display: flex;
-    align-items: center;
-  }
-  
-  .user-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .user-info p {
-    margin: 0;
-    font-weight: bold;
-  }
-  
-  .logout-button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  
-  .logout-button:hover {
-    background-color: #c82333;
-  }
-  
-  /* Contenido principal */
-  .main-content {
-    display: flex;
-    flex: 1;
-    padding: 20px;
-  }
-  
-  /* Menú */
-  .menu {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .menu-item {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-    text-align: left;
-  }
-  
-  .menu-item:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Área de contenido */
-  .content-area {
-    flex: 1;
-    padding: 20px;
-    margin-left: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  height: calc(100vh - 70px); /* 🔹 Resta la altura de `Header` */
+  overflow: hidden;
+}
+
+
+/* Contenido principal */
+.content-area {
+  flex-grow: 1; /* 🔹 Permite que crezca automáticamente */
+  width: 100%; /* 🔹 Usa todo el ancho disponible */
+  min-width: 750px; /* 🔹 Evita que se haga demasiado pequeño */
+  max-width: 100%;
+  padding: 20px;
+  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 🔹 Asegura que el contenido comience desde arriba */
+  align-items: stretch; 
+  transition: margin-left 0.3s ease-in-out;
+}
+
+
+/* Menú lateral (ahora flotante sobre el contenido) */
+.menu {
+  position: fixed;
+  top: 0;
+  left: -250px; /* 🔹 Se oculta inicialmente */
+  width: 250px;
+  height: 100vh;
+  background: #343a40;
+  padding: 20px;
+  transition: left 0.3s ease-in-out;
+  z-index: 1002;
+}
+
+/* Mostrar el menú cuando está visible */
+.menu.visible {
+  left: 0;
+}
+/* Botón ☰ para abrir/cerrar el menú */
+.menu-toggle {
+  position: fixed;
+  top: 75px;
+  left: 15px;
+  background: #343a40;
+  color: white;
+  border: none;
+  padding: 0;
+  width: 25px;
+  height: 25px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1003; /* 🔹 Mayor que el menú para estar siempre accesible */
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Asegurar que el icono dentro del botón tenga el tamaño correcto */
+.menu-toggle span {
+  font-size: 20px;
+  line-height: 1;
+  text-align: center;
+}
+
+/* Ocultar botón cuando el menú está abierto */
+.menu.visible + .menu-toggle {
+  display: none;
+}
+
+
+/* Cuando el menú está abierto */
+.menu-open {
+  margin-left: 250px;
+  max-width: calc(100% - 250px); /* 🔹 Se adapta para que no se estreche */
+}
+
+/* Cuando el menú está oculto */
+.menu.hidden + .content-area {
+  width: 100%;
+  min-width: unset;
+}
+
+
+button {
+  background-color: #F89ABA; /* 🔹 Color principal */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  border-radius: 5px;
+}
+
+/* Cambio de color al pasar el ratón */
+button:hover {
+  background-color: #e87f9a;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+

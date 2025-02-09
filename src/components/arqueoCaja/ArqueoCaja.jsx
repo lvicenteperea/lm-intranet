@@ -31,7 +31,7 @@ const ArqueoCaja = () => {
 
     return (
       <div className="arqueoCaja-container">
-        <h2>Arque Caja</h2>
+        <h2>Arqueo Caja</h2>
         <label>Selecciona una fecha:</label>
         <input 
           type="date" 

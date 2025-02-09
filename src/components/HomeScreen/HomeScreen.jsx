@@ -1,87 +1,79 @@
-import React, { useState } from 'react';
-import Dashboard from '../SincronizaTodo/SincronizaTodo';
+import React, { useState, useEffect } from 'react';
+import Bienvenida from '../Bienvenida/Bienvenida';
+import SincronizaTodo from '../SincronizaTodo/SincronizaTodo';
 import Dashboard2 from '../SincronizaTodo2/SincronizaTodo2';
 import CargaProdERP from '../CargaProdERP/CargaProdERP';
-import Consultas from '../Consultas/Consultas'; // consultas
+import Consultas from '../Consultas/Consultas'; 
 import ArqueoCaja from '../arqueoCaja/ArqueoCaja'; 
 import ArqueoCajaInf from '../ArqueoCajaInf/arqueoCajaInf';
 import ConvierteTarifas from '../ConvierteTarifas/ConvierteTarifas';
 import FichasTecnicas from '../FichasTecnicas/FichasTecnicas';
+import MisDatos from '../MisDatos/MisDatos';
 
 import './HomeScreen.css';
 
 const HomeScreen = ({ user, onLogout }) => {
   const [selectedOption, setSelectedOption] = useState(null);
+  const [menuVisible, setMenuVisible] = useState(window.innerWidth > 390);
 
-  // ✅ Evitar errores si `user` es `undefined` o `null`
-  if (!user) {
-    return <p>Cargando usuario...</p>;
-  }
+  useEffect(() => {
+    const handleResize = () => {
+      setMenuVisible(window.innerWidth > 390);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  if (!user) return <p>Cargando usuario...</p>;
+
+  const toggleMenu = () => setMenuVisible(!menuVisible);
 
   const renderContent = () => {
-    if (selectedOption === "openSincronizaTodo") {
-      return <Dashboard />;
-    } else if (selectedOption === "openSincronizaTodo2") {
-      return <Dashboard2 />;
-    } else if (selectedOption === "openCargaProdErp") {
-      return <CargaProdERP />;
-    } else if (selectedOption === "openConsultaCierre") {
-      return <Consultas />;
-    } else if (selectedOption === "openArqueoCaja") {
-      return <ArqueoCaja />;
-    } else if (selectedOption === "openArqueoCajaInf") {
-      return <ArqueoCajaInf />;
-    } else if (selectedOption === "openConvierteTarifas") {
-      return <ConvierteTarifas />;
-    } else if (selectedOption === "openFichasTecnicas") {
-      return <FichasTecnicas />;
-    } else {
-      return (<div>
-              <h1>Bienvenido</h1> 
-              <p>Selecciona una opción del menú</p>
-              </div>);
+    if (user.showInfo) return <MisDatos user={user} />; // ✅ Mostramos los datos del usuario
+   
+    switch (selectedOption) {
+      case "openSincronizaTodo": return <SincronizaTodo />;
+      case "openSincronizaTodo2": return <Dashboard2 />;
+      case "openCargaProdErp": return <CargaProdERP />;
+      case "openConsultaCierre": return <Consultas />;
+      case "openArqueoCaja": return <ArqueoCaja />;
+      case "openArqueoCajaInf": return <ArqueoCajaInf />;
+      case "openConvierteTarifas": return <ConvierteTarifas />;
+      case "openFichasTecnicas": return <FichasTecnicas />;
+      default:  return <Bienvenida />;
     }
   };
 
-  
-  
-
   return (
     <div className="home-container">
-      {/* Encabezado */}
-      <header className="header">
-        <img src="/logo.png" alt="Logo" className="logo" />
-        <div className="user-menu">
-          <img src="https://via.placeholder.com/40" alt="Usuario" className="user-avatar" />
-          <div className="user-info">
-            <p>{user?.name || "Usuario desconocido"} ({user?.ret_txt || "Sin mensaje"})</p> 
-            <button onClick={onLogout} className="logout-button">Cerrar sesión</button>
-          </div>
-        </div>
-      </header>
+      {/* Botón de menú, solo visible cuando el menú está oculto */}
+      {!menuVisible && (
+        <button className="menu-toggle fixed" onClick={toggleMenu}>
+          ☰
+        </button>
+      )}
+      
+      {/* Menú lateral */}
+      <nav className={`menu ${menuVisible ? 'visible' : 'hidden'}`}>
+        <button className="close-menu" onClick={toggleMenu}>✖</button>
+        {user.options?.map((option, index) => (
+          <button 
+            key={index} 
+            className="menu-item" 
+            onClick={() => {
+              setSelectedOption(option.action);
+              user.showInfo = false;  // ✅ Ocultamos "Mis Datos" al seleccionar otra opción
+            }}
+          >
+            {option.text}
+          </button>
+        ))}
+      </nav>
 
       {/* Contenido principal */}
-      <div className="main-content">
-        <nav className="menu">
-          {user.options?.map((option, index) => (
-            <button 
-              key={index} 
-              className="menu-item" 
-              onClick={() => setSelectedOption(option.action)}
-            >
-              {option.text}
-            </button>
-          ))}
-        </nav>
-        
-        <div>
-          {renderContent()} {/* Renderiza el contenido dinámico */}
-        </div>
-
-        {/* <section className="content-area">
-        {selectedOption === "openSincronizaTodo" ? <Dashboard /> : <p>Selecciona una opción del menú</p>}
-        {selectedOption === "openSincronizaTodo2" ? <Dashboard2 /> : <p>Selecciona una opción del menú2</p>}
-        </section> */}
+      {/* <div className={`content-area ${menuVisible ? 'menu-open' : ''}`}> */}
+      <div className="content-area">
+        {renderContent()}
       </div>
     </div>
   );

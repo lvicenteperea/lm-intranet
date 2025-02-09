@@ -99,47 +99,6 @@ const Consultas = () => {
       </div>
     );
 
-  // return (
-  //   <div className="consultas-table">
-  //     <h2>Consultas</h2>
-  //     <label>Selecciona una fecha:</label>
-  //     <input 
-  //       type="date" 
-  //       value={fecha} 
-  //       onChange={(e) => setFecha(e.target.value)} 
-  //     />
-  //     <button onClick={handleConsulta}>Consultar</button>
-
-  //     {loading && <p>Cargando datos...</p>}
-  //     {error && <p className="error">{error}</p>}
-
-  //     <table className="resultados-table">
-  //       <thead>
-  //         <tr>
-  //           {/* <th>ID Apertura</th> */}
-  //           <th>Puesto Facturación</th>
-  //           <th>Fecha</th>
-  //           <th>Medio de Cobro</th>
-  //           <th>Importe</th>
-  //           {/* <th>Realizado</th> */}
-  //           {/* <th>ID Puesto</th> */}
-  //         </tr>
-  //       </thead>
-  //       <tbody>
-  //         {datosFiltrados.map((item, index) => (
-  //           <tr key={index}>
-  //             {/* <td>{item.ID_Apertura}</td> */}
-  //             <td>{item.Puesto_Facturacion} ({item.ID_Apertura})</td>
-  //             <td>{new Date(item.Fecha_Hora).toLocaleDateString('es-ES')}</td> {/* ✅ Formato DD/MM/YYYY */}
-  //             <td>{item.Medio_Cobro}</td>
-  //             <td>{parseFloat(item.Importe).toFixed(2)} €</td>
-  //             {/* <td>{item.ID_Puesto}</td> */}
-  //           </tr>
-  //         ))}
-  //       </tbody>
-  //     </table>
-  //   </div>
-  // );
 };
 
 export default Consultas;
