@@ -4,11 +4,17 @@ import './ConvierteTarifas.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL_MLL;
 
+// -----------------------------------------------------------------------------------
+// 📌  CONVERTIR TARIFAS
+// -----------------------------------------------------------------------------------
 const ConvierteTarifas = () => {
   const [resultados, setResultados] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // -----------------------------------------------------------------------------------
+  // ✅ CONVERTIR 
+  // -----------------------------------------------------------------------------------
   const handleConversion = async () => {
     setLoading(true);
     setError('');
@@ -23,7 +29,9 @@ const ConvierteTarifas = () => {
     }
   };
 
-  // ✅ Función para descargar el archivo desde la API
+  // -----------------------------------------------------------------------------------
+  // ✅ DESCARGAR
+  // -----------------------------------------------------------------------------------
   const handleDownload = async (nombreArchivo) => {
     try {
       const token = localStorage.getItem("token"); // Obtiene el token
@@ -63,6 +71,9 @@ const ConvierteTarifas = () => {
     }
   };
 
+  // -----------------------------------------------------------------------------------
+  // ✅ HTML
+  // -----------------------------------------------------------------------------------
   return (
     <div className="convierte-container">
       <h2>Conversión de Tarifas</h2>

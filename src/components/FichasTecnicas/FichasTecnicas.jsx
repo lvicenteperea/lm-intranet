@@ -8,6 +8,8 @@ const FichasTecnicas = () => {
   const [error, setError] = useState('');
   const [descargando, setDescargando] = useState(false);
 
+
+
   // 📌 Llamar al servicio para generar las fichas técnicas
   const handleConsulta = async () => {
     setLoading(true);
@@ -24,8 +26,12 @@ const FichasTecnicas = () => {
     }
   };
 
-  // 📌 Llamar al servicio para descargar todas las fichas técnicas
-  const handleDescarga = async () => {
+
+
+// -----------------------------------------------------------------------------------
+// 📌 Llamar al servicio para descargar todas las fichas técnicas
+// -----------------------------------------------------------------------------------
+const handleDescarga = async () => {
     setDescargando(true);
 
     const nombresArchivos = resultados.map(item => item.fichero); // Extraer nombres de archivos
@@ -40,6 +46,10 @@ const FichasTecnicas = () => {
     }
   };
 
+
+// -----------------------------------------------------------------------------------
+// 📌 Código HTML
+// -----------------------------------------------------------------------------------
   return (
     <div className="fichas-container">
       <h2>Generar Fichas Técnicas</h2>

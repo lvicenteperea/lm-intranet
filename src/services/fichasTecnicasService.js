@@ -1,5 +1,9 @@
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL_MLL
 
+
+// -----------------------------------------------------------------------------------
+// 📌 Servicio para GENERAR todas las FICHAS TECNICAS
+// -----------------------------------------------------------------------------------
 export const fetchFichasTecnicas = async () => {
   console.log("📡 Enviando solicitud para generar fichas técnicas...");
 
@@ -36,7 +40,9 @@ export const fetchFichasTecnicas = async () => {
   }
 };
 
-// 📌 Servicio para descargar todas las fichas técnicas
+// -----------------------------------------------------------------------------------
+// 📌 Servicio para DESCARGAR todas las FICHAS TECNICAS
+// -----------------------------------------------------------------------------------
 export const descargarFichasTecnicas = async (nombresArchivos) => {
   console.log("📡 Enviando solicitud de descarga de fichas...");
 

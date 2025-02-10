@@ -1,5 +1,8 @@
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL_MLL
 
+// -----------------------------------------------------------------------------------
+// 📌 Llamar al servicio para CONVERTIR TARIFAS
+// -----------------------------------------------------------------------------------
 export const fetchConvierteTarifas = async () => {
     console.log(`📡 Enviando solicitud a la API para convertir tarifas...`);
   
