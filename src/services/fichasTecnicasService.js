@@ -1,47 +1,94 @@
 export const fetchFichasTecnicas = async () => {
-    console.log(`📡 Enviando solicitud a la API para obtener fichas técnicas...`);
-  
-    const token = localStorage.getItem("token"); // Obtener el token
-    if (!token) {
-      console.error("❌ No estás autenticado. Inicia sesión primero.");
-      return { success: false, message: "No estás autenticado. Inicia sesión primero." };
-    }
-  
-    try {
-      const response = await fetch(`http://127.0.0.1:8000/mallorquina/mll_fichas_tecnicas?id_App=1&user=usuario_dev&ret_code=0&ret_txt=OK&output_path=`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': '*/*',
-          "Authorization": `Bearer ${token}`
-        }
-      });
-  
-      console.log("📡 Respuesta recibida:", response);
-  
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error(`❌ Error en la obtención de fichas técnicas: HTTP ${response.status}`, errorText);
-        return { success: false, message: `Error HTTP ${response.status}: ${errorText}` };
+  console.log("📡 Enviando solicitud para generar fichas técnicas...");
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    console.error("❌ No estás autenticado.");
+    return { success: false, message: "No estás autenticado. Inicia sesión primero." };
+  }
+
+  try {
+    const response = await fetch("http://localhost:8000/mallorquina/mll_fichas_tecnicas?id_App=1&user=usuario_dev&ret_code=0&ret_txt=Ok&output_path", {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${token}`
       }
-  
-      const data = await response.json();
-      console.log("📡 Datos del servidor:", data);
-  
-      if (!Array.isArray(data.resultados)) {
-        console.error("❌ Error: la API no devolvió una lista de textos válida", data);
-        return { success: false, message: "Error: la API no devolvió una lista de textos válida" };
-      }
-  
-      console.log("✅ Obtención de fichas técnicas exitosa. Resultados:", data.resultados);
-  
-      return {
-        success: true,
-        resultados: data.resultados
-      };
-    } catch (error) {
-      console.error("🛑 Error de conexión o en la respuesta:", error.message);
-      return { success: false, message: `No se pudo conectar con el servidor: ${error.message}` };
+    });
+
+    console.log("📡 Respuesta recibida:", response);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      return { success: false, message: `Error HTTP ${response.status}: ${errorText}` };
     }
-  };
-  
+
+    const data = await response.json();
+    if (!Array.isArray(data.resultados)) {
+      return { success: false, message: "Error: la API no devolvió una lista válida" };
+    }
+
+    return { success: true, resultados: data.resultados };
+  } catch (error) {
+    return { success: false, message: `No se pudo conectar con el servidor: ${error.message}` };
+  }
+};
+
+// 📌 Servicio para descargar todas las fichas técnicas
+export const descargarFichasTecnicas = async (nombresArchivos) => {
+  console.log("📡 Enviando solicitud de descarga de fichas...");
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    console.error("❌ No estás autenticado.");
+    return { success: false, message: "No estás autenticado. Inicia sesión primero." };
+  }
+
+  try {
+    const response = await fetch("http://localhost:8000/mallorquina/mll_descarga", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        id_App: 1,
+        user: "usuario_dev",
+        ret_code: 0,
+        ret_txt: "Ok",
+        tipo: "Alérgenos",
+        nombres: []
+      })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      return { success: false, message: `Error HTTP ${response.status}: ${errorText}` };
+    }
+
+    // ✅ Procesar la respuesta como un Blob (archivo binario)
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+
+    // ✅ Determinar el nombre del archivo correctamente
+    const fileName = `fichas_tecnicas.zip`;
+    // nombresArchivos.length === 1 
+    // ? nombresArchivos[0]  // Si hay un solo archivo, usar su nombre real
+    // : `fichas_tecnicas_${new Date().toISOString().slice(0, 10)}.zip`; // Si son varios, usar un nombre genérico
+    
+
+    // ✅ Crear un enlace temporal para descargar el archivo
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = fileName;  // ⚡ Aquí se asigna el nombre correcto
+    // a.download = nombresArchivos.length > 1 ? "fichas_tecnicas.zip" : nombresArchivos[0]; // Nombre de archivo
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    return { success: true, message: "Descarga iniciada" };
+  } catch (error) {
+    return { success: false, message: `No se pudo conectar con el servidor: ${error.message}` };
+  }
+};
+

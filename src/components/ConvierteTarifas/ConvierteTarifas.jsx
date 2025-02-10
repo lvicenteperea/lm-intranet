@@ -27,12 +27,21 @@ const ConvierteTarifas = () => {
     try {
       const token = localStorage.getItem("token"); // Obtiene el token
 
-      const response = await fetch(`http://localhost:8000/mallorquina/mll_descarga?id_App=1&user=usuario_dev&ret_code=0&ret_txt=Ok&tipo=TPV&nombre=${nombreArchivo}`, {
-        method: 'GET',
+      const response = await fetch(`http://localhost:8000/mallorquina/mll_descarga`, {
+        method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
           // 'Accept': 'application/octet-stream' // Indica que es un archivo
-        }
+        },
+        body: JSON.stringify({
+          id_App: 1,
+          user: "usuario_dev",
+          ret_code: 0,
+          ret_txt: "Ok",
+          tipo: "TPV",
+          nombres: [nombreArchivo] // 👈 Enviado como lista
+        })
       });
 
       if (!response.ok) {
