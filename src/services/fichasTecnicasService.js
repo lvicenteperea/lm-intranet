@@ -1,3 +1,5 @@
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL_MLL
+
 export const fetchFichasTecnicas = async () => {
   console.log("📡 Enviando solicitud para generar fichas técnicas...");
 
@@ -8,7 +10,7 @@ export const fetchFichasTecnicas = async () => {
   }
 
   try {
-    const response = await fetch("http://localhost:8000/mallorquina/mll_fichas_tecnicas?id_App=1&user=usuario_dev&ret_code=0&ret_txt=Ok&output_path", {
+    const response = await fetch(`${API_BASE_URL}/mll_fichas_tecnicas?id_App=1&user=usuario_dev&ret_code=0&ret_txt=Ok&output_path`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -45,7 +47,7 @@ export const descargarFichasTecnicas = async (nombresArchivos) => {
   }
 
   try {
-    const response = await fetch("http://localhost:8000/mallorquina/mll_descarga", {
+    const response = await fetch(`${API_BASE_URL}/mll_descarga`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

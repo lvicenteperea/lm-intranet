@@ -1,3 +1,5 @@
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL_MLL
+
 export const fetchArqueoCajaInf = async (fecha, tienda) => {
     console.log(`📡 Enviando solicitud a la API para fecha: ${fecha} y tienda: ${tienda}...`);
   
@@ -8,7 +10,7 @@ export const fetchArqueoCajaInf = async (fecha, tienda) => {
     }
   
     try {
-      const response = await fetch(`http://localhost:8000/mallorquina/mll_inf_arqueo_caja?id_App=1&user=usuario_dev&ret_code=0&ret_txt=&fecha=${fecha}&tienda=${tienda}`, {
+      const response = await fetch(`${API_BASE_URL}/mll_inf_arqueo_caja?id_App=1&user=usuario_dev&ret_code=0&ret_txt=&fecha=${fecha}&tienda=${tienda}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

@@ -1,3 +1,5 @@
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL_MLL
+
 export const fetchConsultas = async (fecha) => {
   console.log(`📡 Buscando Token...`);
 
@@ -10,7 +12,7 @@ export const fetchConsultas = async (fecha) => {
   try {
       console.log(`📡 Enviando solicitud a la API para fecha: ${fecha}...`);
 
-      const response = await fetch(`http://localhost:8000/mallorquina/mll_consultas_cierre?id_App=1&user=usuario_dev&ret_code=0&ret_txt=&fecha=${fecha}`, {
+      const response = await fetch(`${API_BASE_URL}/mll_consultas_cierre?id_App=1&user=usuario_dev&ret_code=0&ret_txt=&fecha=${fecha}`, {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json',

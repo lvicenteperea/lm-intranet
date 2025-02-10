@@ -1,3 +1,5 @@
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL_MLL
+
 export const fetchConvierteTarifas = async () => {
     console.log(`📡 Enviando solicitud a la API para convertir tarifas...`);
   
@@ -8,7 +10,7 @@ export const fetchConvierteTarifas = async () => {
     }
   
     try {
-      const response = await fetch(`http://localhost:8000/mallorquina/mll_convierte_tarifas?id_App=1&user=usuario_dev&ret_code=0&ret_txt=Ok`, {
+      const response = await fetch(`${API_BASE_URL}/mll_convierte_tarifas?id_App=1&user=usuario_dev&ret_code=0&ret_txt=Ok`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

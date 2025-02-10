@@ -2,26 +2,13 @@
 // js para llamar a la api REAL
 // luis mi_contraseña_segura
 // ---------------------------------------------------------------------
-
-// Función para verificar si localStorage está disponible
-// const isStorageAvailable = (type) => {
-//   try {
-//     const storage = window[type];
-//     const testKey = "__test__";
-//     storage.setItem(testKey, "1");
-//     storage.removeItem(testKey);
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// };
-
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL_MLL
 
 export const login = async (username, password) => {
   try {
     console.log("📡 Enviando solicitud a la API...");
 
-    const response = await fetch('http://localhost:8000/auth/login?id_App=1&user=usuario_dev&ret_code=0&ret_txt=Registro%20exitoso', {
+    const response = await fetch(`${API_BASE_URL}/login?id_App=1&user=usuario_dev&ret_code=0&ret_txt=Registro%20exitoso`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

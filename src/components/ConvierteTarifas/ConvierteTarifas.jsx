@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { fetchConvierteTarifas } from '../../services/convierteTarifasService';
 import './ConvierteTarifas.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL_MLL;
 
 const ConvierteTarifas = () => {
   const [resultados, setResultados] = useState([]);
@@ -27,7 +28,7 @@ const ConvierteTarifas = () => {
     try {
       const token = localStorage.getItem("token"); // Obtiene el token
 
-      const response = await fetch(`http://localhost:8000/mallorquina/mll_descarga`, {
+      const response = await fetch(`${API_BASE_URL}/mallorquina/mll_descarga`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
