@@ -36,7 +36,7 @@ const ConvierteTarifas = () => {
     try {
       const token = localStorage.getItem("token"); // Obtiene el token
 
-      const response = await fetch(`${API_BASE_URL}/mallorquina/mll_descarga`, {
+      const response = await fetch(`${API_BASE_URL}/mll_descarga`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -54,7 +54,7 @@ const ConvierteTarifas = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`Error al descargar el archivo: ${response.statusText}`);
+        throw new Error(`Error al descargar el archivo: ${response.statusText}-${nombreArchivo}`);
       }
 
       const blob = await response.blob(); // 📂 Convierte la respuesta en un archivo binario

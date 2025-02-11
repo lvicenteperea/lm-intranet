@@ -10,16 +10,37 @@ export const fetchConsultas = async (fecha) => {
   }
 
   try {
-      console.log(`📡 Enviando solicitud a la API para fecha: ${fecha}...`);
+        console.log(`📡 Enviando solicitud a la API para fecha: ${fecha}...`);
 
-      const response = await fetch(`${API_BASE_URL}/mll_consultas_cierre?id_App=1&user=usuario_dev&ret_code=0&ret_txt=&fecha=${fecha}`, {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json',
-              'Accept': '*/*',
-              "Authorization": `Bearer ${token}`
-          }
-      });
+    //   const response = await fetch(`${API_BASE_URL}/mll_consultas_cierre?id_App=1&user=usuario_dev&ret_code=0&ret_txt=&fecha=${fecha}`, {
+    //       method: 'GET',
+    //       headers: {
+    //           'Content-Type': 'application/json',
+    //           'Accept': '*/*',
+    //           "Authorization": `Bearer ${token}`
+    //       }
+    //   });
+
+        const response = await fetch(`${API_BASE_URL}/mll_consultas_cierre`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': '*/*',
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                id_App: 1,
+                user: "usuario_dev",
+                ret_code: 0,
+                ret_txt: "Ok",
+                fecha:`${fecha}`
+            })
+        });
+
+
+
+
+
 
       console.log("📡 Respuesta recibida:", response);
 
