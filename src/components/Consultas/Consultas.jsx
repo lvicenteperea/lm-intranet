@@ -7,6 +7,7 @@ const colores = ["#f9f9f9", "#e3e3e3"]; // Alternancia de colores
 
 const Consultas = () => {
   const [fecha, setFecha] = useState('');
+  const [tienda, setTienda] = useState("0"); // Tienda por defecto: Todas
   const [resultados, setResultados] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -25,7 +26,7 @@ const Consultas = () => {
     setLoading(true);
     setError('');
     
-    const response = await fetchConsultas(fecha);
+    const response = await fetchConsultas(fecha, tienda);
     setLoading(false);
 
     if (response.success) {
@@ -58,6 +59,19 @@ const Consultas = () => {
           value={fecha} 
           onChange={(e) => setFecha(e.target.value)} 
         />
+        <label>Selecciona una tienda:</label>
+        <select value={tienda} onChange={(e) => setTienda(e.target.value)}>
+          <option value="0">Todas</option>
+          <option value="1">La Nube</option>
+          <option value="2">Velázquez</option>
+          <option value="3">MG Norte</option>
+          <option value="4">Quevedo</option>
+          <option value="5">SOL</option>
+          <option value="6">MG</option>
+          <option value="7">SOL-Bombonería</option>
+          <option value="81">LOCAL LM</option>
+          <option value="80">LOCAL LM</option>
+        </select>
         <button onClick={handleConsulta}>Consultar</button>
         <p></p>
 

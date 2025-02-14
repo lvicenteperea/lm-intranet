@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { sincronizaTodo } from '../../services/api';
+import { MaquetaSincronizaTodo } from '../../services/api';
 import './SincronizaTodo2.css';
 
 const SincronizaTodo = () => {
@@ -13,7 +13,7 @@ const SincronizaTodo = () => {
     setLoading(true);
     setMessage(null);
 
-    const response = await sincronizaTodo(fileName, date);
+    const response = await MaquetaSincronizaTodo(fileName, date);
     
     setLoading(false);
     setMessage(response.message);

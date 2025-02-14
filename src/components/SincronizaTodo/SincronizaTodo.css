@@ -1,57 +1,95 @@
+/* Contenedor principal */
 .SincronizaTodo-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    text-align: center;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  
-  input {
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  button {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .success {
-    color: green;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .error {
-    color: red;
-    font-weight: bold;
-    text-align: center;
-  }
-  
+  max-width: 1024px;
+  min-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Estilos generales de la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: white;
+}
+
+/* Encabezados de tabla */
+th {
+  background-color: #f89aba; /* Color del encabezado */
+  color: white;
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+/* Filas de tabla */
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Alternar colores en las filas */
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+/* Botón de alternar tablas */
+.toggle-btn {
+  background-color: #f89aba;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-top: 10px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+}
+
+.toggle-btn:hover {
+  background-color: #d67882;
+}
+
+/* Contenedor de resultados */
+.resultados-container {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* Contenedor de cada tabla */
+.tabla-container {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Mensaje de error */
+.error-container {
+  background-color: #ffdddd;
+  color: #a94442;
+  padding: 15px;
+  border-left: 5px solid #f44336;
+  margin-top: 10px;
+}
+
+.error-icon {
+  font-size: 24px;
+}
+
+.error-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.error-message {
+  font-size: 16px;
+}
+
