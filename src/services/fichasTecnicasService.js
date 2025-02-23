@@ -14,12 +14,19 @@ export const fetchFichasTecnicas = async () => {
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/mll_fichas_tecnicas?id_App=1&user=usuario_dev&ret_code=0&ret_txt=Ok&output_path`, {
-      method: 'GET',
+    const response = await fetch(`${API_BASE_URL}/mll_fichas_tecnicas`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         "Authorization": `Bearer ${token}`
-      }
+      },
+      body: JSON.stringify({
+        id_App: 1,
+        user: "usuario_dev",
+        ret_code: 0,
+        ret_txt: "Ok",
+        output_path: ""
+      })
     });
 
     console.log("📡 Respuesta recibida:", response);

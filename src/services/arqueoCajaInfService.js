@@ -10,13 +10,21 @@ export const fetchArqueoCajaInf = async (fecha, tienda) => {
     }
   
     try {
-      const response = await fetch(`${API_BASE_URL}/mll_inf_arqueo_caja?id_App=1&user=usuario_dev&ret_code=0&ret_txt=&fecha=${fecha}&tienda=${tienda}`, {
-        method: 'GET',
+      const response = await fetch(`${API_BASE_URL}/mll_inf_arqueo_caja`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*',
           "Authorization": `Bearer ${token}`
-        }
+        },
+        body: JSON.stringify({
+          id_App: 1,
+          user: "usuario_dev",
+          ret_code: 0,
+          ret_txt: "Ok",
+          fecha: fecha,
+          tienda: tienda
+        })
       });
   
       console.log("📡 Respuesta recibida:", response);

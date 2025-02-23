@@ -13,13 +13,19 @@ export const fetchConvierteTarifas = async () => {
     }
   
     try {
-      const response = await fetch(`${API_BASE_URL}/mll_convierte_tarifas?id_App=1&user=usuario_dev&ret_code=0&ret_txt=Ok`, {
-        method: 'GET',
+      const response = await fetch(`${API_BASE_URL}/mll_convierte_tarifas`, { 
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*',
           "Authorization": `Bearer ${token}`
-        }
+        },
+        body: JSON.stringify({
+          id_App: 1,
+          user: "usuario_dev",
+          ret_code: 0,
+          ret_txt: "Ok"
+        })
       });
   
       console.log("📡 Respuesta recibida:", response);
