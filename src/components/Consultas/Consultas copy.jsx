@@ -38,16 +38,16 @@ const Consultas = () => {
 
   const mediosExcluidos = ["TICKET RESTAURANT", "RAPID EXPRESS", "CREDITO CLIENTE", "TRANSFERENCIA", "SMS", "STUART", "GLOVO"];
   const datosFiltrados = resultados
-    // .filter(item => !(mediosExcluidos.includes(item.id_medios_pago) && parseFloat(item.total_ventas) === 0)) // ✅ Filtra solo si Medio_Cobro está en la lista y el total_ventas es 0
-    // .sort((a, b) => {
-    //   if (a.cierre_tpv_id !== b.cierre_tpv_id) {
-    //     return a.cierre_tpv_id - b.cierre_tpv_id; // ✅ Ordena por cierre_tpv_id
-    //   }
-    //   if (a.Nombre_TPV !== b.Nombre_TPV) {
-    //     return a.Nombre_TPV.localeCompare(b.Nombre_TPV); // ✅ Ordena por Nombre_TPV
-    //   }
-    //   return a.id_medios_pago.localeCompare(b.id_medios_pago); // ✅ Ordena por Medio_Cobro (alfabéticamente)
-    // });
+    .filter(item => !(mediosExcluidos.includes(item.Medio_Cobro) && parseFloat(item.Importe) === 0)) // ✅ Filtra solo si Medio_Cobro está en la lista y el importe es 0
+    .sort((a, b) => {
+      if (a.ID_Apertura !== b.ID_Apertura) {
+        return a.ID_Apertura - b.ID_Apertura; // ✅ Ordena por ID_Apertura
+      }
+      if (a.Puesto_Facturacion !== b.Puesto_Facturacion) {
+        return a.Puesto_Facturacion.localeCompare(b.Puesto_Facturacion); // ✅ Ordena por Puesto_Facturacion
+      }
+      return a.Medio_Cobro.localeCompare(b.Medio_Cobro); // ✅ Ordena por Medio_Cobro (alfabéticamente)
+    });
 
 
     return (
@@ -78,35 +78,30 @@ const Consultas = () => {
         <table className="consultas-table">
           <thead>
             <tr>
-              <th className="align-left">TPV</th> {/* ✅ Alineación izquierda */}
+              <th className="align-left">Puesto Facturación</th> {/* ✅ Alineación izquierda */}
               {/* <th>ID Apertura</th> */}
-              <th>Cierre</th>
               <th>Fecha</th>
               <th>Medio Cobro</th>
               <th>Importe</th>
-              <th>Operaciones</th>
             </tr>
           </thead>
           <tbody>
             {datosFiltrados.map((item, index) => {
-              // Si el cierre_tpv_id cambia, alternamos color
-              if (item.cierre_tpv_id !== lastID) {
+              // Si el ID_Apertura cambia, alternamos color
+              if (item.ID_Apertura !== lastID) {
                 colorIndex = (colorIndex + 1) % colores.length;
-                lastID = item.cierre_tpv_id;
+                lastID = item.ID_Apertura;
               }
     
               // Guardamos el color en un mapa por ID_Apertura
               rowColors.set(item.ID_Apertura, colores[colorIndex]);
     
               return (
-                <tr key={index} style={{ backgroundColor: rowColors.get(item.cierre_tpv_id) }}>
-                  <td className="align-left">{item.Nombre_TPV} ({item.serie})</td> {/* ✅ Alineación izquierda */}
-
-                  <td>{item.cierre_tpv_desc} ({item.cierre_tpv_id})</td>
-                  <td>{new Date(item.fecha).toLocaleDateString('es-ES')}</td>
-                  <td>{item.Nombre_MdP} ({item.id_medios_pago})</td>
-                  <td>{parseFloat(item.total_ventas).toFixed(2)} €</td>
-                  <td>{parseFloat(item.total_operaciones).toFixed(2)} €</td>
+                <tr key={index} style={{ backgroundColor: rowColors.get(item.ID_Apertura) }}>
+                  <td className="align-left">{item.Puesto_Facturacion} ({item.ID_Apertura})</td> {/* ✅ Alineación izquierda */}
+                  <td>{new Date(item.Fecha_Hora).toLocaleDateString('es-ES')}</td>
+                  <td>{item.Medio_Cobro}</td>
+                  <td>{parseFloat(item.Importe).toFixed(2)} €</td>
                 </tr>
               );
             })}

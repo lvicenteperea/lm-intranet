@@ -1,6 +1,6 @@
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL_MLL
 
-export const fetchConsultas = async (fecha, tienda) => {
+export const fetchConsultas = async (fecha, entidad) => {
   console.log(`📡 Buscando Token...`);
 
   const token = localStorage.getItem("token"); // Obtener token JWT
@@ -10,7 +10,7 @@ export const fetchConsultas = async (fecha, tienda) => {
   }
 
   try {
-        console.log(`📡 Enviando solicitud a la API para fecha-tienda: ${fecha}-${tienda}...`);
+        console.log(`📡 Enviando solicitud a la API para fecha-entidad: ${fecha}-${entidad}...`);
         const response = await fetch(`${API_BASE_URL}/mll_consultas_cierre`, {
             method: 'POST',
             headers: {
@@ -24,14 +24,9 @@ export const fetchConsultas = async (fecha, tienda) => {
                 ret_code: 0,
                 ret_txt: "Ok",
                 fecha:`${fecha}`,
-                tienda:`${tienda}`
+                entidad:`${entidad}`
             })
         });
-
-
-
-
-
 
       console.log("📡 Respuesta recibida:", response);
 

@@ -1,6 +1,6 @@
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL_MLL
 
-export const fetchArqueoCaja = async (fecha) => {
+export const fetchArqueoCaja = async (dias) => {
     console.log(`📡 Buscando Token...`);
   
     const token = localStorage.getItem("token"); // Obtener token JWT
@@ -10,7 +10,7 @@ export const fetchArqueoCaja = async (fecha) => {
     }
   
     try {
-        console.log(`📡 Enviando solicitud a la API para fecha: ${fecha}...`);
+        console.log(`📡 Enviando solicitud a la API para: ${dias} dias`);
   
         const response = await fetch(`${API_BASE_URL}/mll_arqueo_caja`, {
             method: 'POST',
@@ -24,7 +24,7 @@ export const fetchArqueoCaja = async (fecha) => {
               user: "usuario_dev",
               ret_code: 0,
               ret_txt: "Ok",
-              fecha: fecha
+              dias: dias
             })
         });
   

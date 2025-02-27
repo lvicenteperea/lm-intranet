@@ -3,21 +3,21 @@ import { fetchArqueoCaja } from '../../services/api';
 import './ArqueoCaja.css';
 
 const ArqueoCaja = () => {
-    const [fecha, setFecha] = useState('');
+    const [dias, setDias] = useState(1);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [message, setMessage] = useState("");
 
     const handleArqueoCaja = async () => {
-        if (!fecha) {
-        setError('Por favor, selecciona una fecha.');
-        return;
+        if (!dias) {
+          setError('Indica el número de dias a sincronizar');
+          return;
         }
 
         setLoading(true);
         setError('');
         
-        const response = await fetchArqueoCaja(fecha);
+        const response = await fetchArqueoCaja(dias);
         setLoading(false);
 
         if (response.success) {
@@ -32,12 +32,14 @@ const ArqueoCaja = () => {
     return (
       <div className="arqueoCaja-container">
         <h2>Arqueo Caja</h2>
-        <label>Selecciona una fecha:</label>
-        <input 
-          type="date" 
-          value={fecha} 
-          onChange={(e) => setFecha(e.target.value)} 
-        />
+        <label>Dias a realizar el arqueo:</label>
+        <select value={dias} onChange={(e) => setDias(Number(e.target.value))}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
         <button onClick={handleArqueoCaja}>Arqueo Caja</button>
         <p></p>
 

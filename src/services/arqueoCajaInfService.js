@@ -1,7 +1,7 @@
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL_MLL
 
-export const fetchArqueoCajaInf = async (fecha, tienda) => {
-    console.log(`📡 Enviando solicitud a la API para fecha: ${fecha} y tienda: ${tienda}...`);
+export const fetchArqueoCajaInf = async (fecha, entidad) => {
+    console.log(`📡 Enviando solicitud a la API para fecha: ${fecha} y tienda: ${entidad}...`);
   
     const token = localStorage.getItem("token"); // Obtener el token
     if (!token) {
@@ -23,7 +23,7 @@ export const fetchArqueoCajaInf = async (fecha, tienda) => {
           ret_code: 0,
           ret_txt: "Ok",
           fecha: fecha,
-          tienda: tienda
+          entidad: entidad
         })
       });
   
