@@ -8,6 +8,7 @@ import ArqueoCaja from '../arqueoCaja/ArqueoCaja';
 import ArqueoCajaInf from '../ArqueoCajaInf/arqueoCajaInf';
 import ConvierteTarifas from '../ConvierteTarifas/ConvierteTarifas';
 import FichasTecnicas from '../FichasTecnicas/FichasTecnicas';
+import Alergenos from '../Alergenos/Alergenos';
 import MisDatos from '../MisDatos/MisDatos';
 
 import './HomeScreen.css';
@@ -40,6 +41,7 @@ const HomeScreen = ({ user, onLogout }) => {
       case "openArqueoCajaInf": return <ArqueoCajaInf />;
       case "openConvierteTarifas": return <ConvierteTarifas />;
       case "openFichasTecnicas": return <FichasTecnicas />;
+      case "openAlergenos": return <Alergenos />;
       default:  return <Bienvenida />;
     }
   };

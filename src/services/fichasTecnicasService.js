@@ -25,7 +25,8 @@ export const fetchFichasTecnicas = async () => {
         user: "usuario_dev",
         ret_code: 0,
         ret_txt: "Ok",
-        output_path: ""
+        output_path: "",
+        punto_venta: 0
       })
     });
 

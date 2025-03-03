@@ -28,7 +28,7 @@ export const fetchConsultas = async (fecha, entidad) => {
             })
         });
 
-      console.log("📡 Respuesta recibida:", response);
+      console.log("📡 Respuesta recibida:", fecha, entidad, response);
 
       if (!response.ok) {
           const errorText = await response.text();
