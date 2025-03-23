@@ -26,7 +26,8 @@ const Alergenos = () => {
   };
 
   // const rutaOriginal = "D:/Nube/GitHub/Mallorquina_API/app/ficheros/imagen/alergenos/";
-  const nuevaRuta = "http://localhost:3000/img/";
+  // const nuevaRuta = "http://localhost:3000/img/";
+  // const nuevaRuta = "http://localhost:3000/img/";   // http://localhost:3000/img/alergenos/Cacahuetes.ico
 
 
 
@@ -44,7 +45,8 @@ const Alergenos = () => {
 
     if (response.success) {
       setTexto(response.resultados[0]);
-      setHtml(response.resultados[1].replace(/D:\/Nube\/GitHub\/Mallorquina_API\/app\/ficheros\/imagen\//g, nuevaRuta))
+      // setHtml(response.resultados[1].replace(/D:\/Nube\/GitHub\/Mallorquina_API\/app\/ficheros\/imagen\//g, nuevaRuta))
+      // setHtml(response.resultados[1].replace(/C:\/GitHub\/Mallorquina_API\/app\/ficheros\/imagen\//g, nuevaRuta))
       setResultados(response.resultados);
     } else {
       setError("Se ha producico un error al generar el listado de alergenos"); // response.message);
@@ -63,12 +65,14 @@ const Alergenos = () => {
       {/* ✅ Botón SIEMPRE visible para generar el listado de alergenos*/}
       <label>Selecciona una entidad:</label>
       <select value={punto_venta} onChange={(e) => setPunto_venta(e.target.value)}>
-        <option value="2">Velázquez</option>
-        <option value="3">MG Norte (Kiosko)</option>
-        <option value="4">Quevedo</option>
-        <option value="5">Sol - Tienda</option>
+        <option value="4">Sol - Quevedo</option>
+        <option value="1">Velázquez - MG</option>
+        <option value="7">Salón SOL</option>
+
+        {/* <option value="5">Sol - Tienda</option>
         <option value="6">MG Tienda</option>
-        <option value="7">Sol - Bombonería</option>
+        <option value="7">Sol - Bombonería</option> */}
+
         <option value="90">Catering</option>
         <option value="91">Web</option>
         <option value="92">Glovo</option>

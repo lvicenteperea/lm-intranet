@@ -88,15 +88,6 @@ const handleDescarga = async () => {
       {error && <p className="error">{error}</p>}
 
       <div className="resultados-list">
-        {/* {resultados.length > 0 ? (
-          <p>
-            {resultados.map((item, index) => (
-              item.ret_txt
-            ))}
-          </p>
-        ) : (
-          <p>Pulsa una opción</p>
-        )} */}
         {resultados.length > 0 ? (
           <div>
             <p>{resultados[0]}</p>
