@@ -48,6 +48,7 @@ const Alergenos = () => {
       // setHtml(response.resultados[1].replace(/D:\/Nube\/GitHub\/Mallorquina_API\/app\/ficheros\/imagen\//g, nuevaRuta))
       // setHtml(response.resultados[1].replace(/C:\/GitHub\/Mallorquina_API\/app\/ficheros\/imagen\//g, nuevaRuta))
       setResultados(response.resultados);
+      setHtml(response.resultados[1]);
     } else {
       setError("Se ha producico un error al generar el listado de alergenos"); // response.message);
     }

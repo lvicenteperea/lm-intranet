@@ -41,7 +41,9 @@ export const fetchAlergenos = async (punto_venta) => {
     if (!Array.isArray(data.resultados)) {
       return { success: false, message: "Error: la API no devolvió una lista válida" };
     }
-
+    console.log("📡 -------------------->>>>>");
+    console.log(data.resultados)
+    console.log("📡 -------------------->>>>>");
     return { success: true, resultados: data.resultados };
   } catch (error) {
     return { success: false, message: `No se pudo conectar con el servidor: ${error.message}` };
