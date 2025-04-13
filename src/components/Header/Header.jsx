@@ -32,7 +32,7 @@ const Header = ({ user, onLogout, onShowUserInfo }) => {
         {/* Nombre del usuario con menú desplegable */}
         <div className="user-info">
           <p className="username" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {user?.username || "Usuario"}
+            {user?.name || "Usuario"}
           </p>
         </div>
 

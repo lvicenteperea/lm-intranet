@@ -66,6 +66,7 @@ const Alergenos = () => {
       {/* ✅ Botón SIEMPRE visible para generar el listado de alergenos*/}
       <label>Selecciona una entidad:</label>
       <select value={punto_venta} onChange={(e) => setPunto_venta(e.target.value)}>
+        <option value="0">Todos</option>
         <option value="4">Sol - Quevedo</option>
         <option value="1">Velázquez - MG</option>
         <option value="7">Salón SOL</option>
