@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { fetchCargaErp } from '../../services/api';
 import './CargaProdERP.css';
 
 const CargaProdERP = () => {
@@ -35,23 +34,51 @@ const CargaProdERP = () => {
     setLoading(true);
     setMessage("");
 
-    const response = await fetchCargaErp(file);
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setMessage("❌ No estás autenticado. Inicia sesión primero.");
+        setLoading(false);
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("id_App", 63);
+      formData.append("user", "usuario_dev");
+      formData.append("ret_code", 0);
+      formData.append("ret_txt", "OK");
+      formData.append("file", file);
+
+      const response = await fetch("http://127.0.0.1:8000/mallorquina/mll_carga_prod_erp", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+        body: formData // Enviamos los datos como `multipart/form-data`
+      });
+
+      console.log("📡 Respuesta recibida:", response);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Error HTTP ${response.status}: ${errorText}`);
+      }
+
+      const data = await response.json();
+      console.log("📡 Datos del servidor:", data);
+
+      if (data.ret_code === 0) {
+        setMessage(`✅ Carga exitosa: ${data.ret_txt} - ${data.resultados}`);
+      } else {
+        setMessage(`❌ Error en la carga: ${data.ret_txt}`);
+      }
+
+    } catch (error) {
+      console.error("❌ Error al subir el archivo:", error);
+      setMessage("❌ Error al conectar con el servidor.");
+    }
+
     setLoading(false);
-
-    // este IF es para asegurar que no falle.
-    if (!response || typeof response !== 'object') {
-      setMessage("❌ Error desconocido al conectar con el servidor.");
-      return;
-    }
-
-    console.log("📡 esta es Respuesta recibida:", response);
-    setMessage(response);
-
-    if (response.success) {
-      setMessage(response.resultados);
-    } else {
-      setMessage(response.message);
-    }
   };
 
   return (
