@@ -25,7 +25,7 @@ const abrirNuevaPestana = (htmlContent) => {
 };
 
 // const rutaOriginal = "D:/Nube/GitHub/Mallorquina_API/app/ficheros/imagen/alergenos/";
-const nuevaRuta = "http://localhost:3000/img/alergenos/";
+const nuevaRuta = REACT_APP_ALERGENOS
 
 
 // -----------------------------------------------------------------------------------
