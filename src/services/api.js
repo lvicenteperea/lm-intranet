@@ -7,3 +7,4 @@ export * from './consultaService';
 export * from './arqueoCajaService';
 export * from './convierteTarifasService';
 export * from './fichasTecnicasService';
+export * from './registerService';

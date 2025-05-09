@@ -10,6 +10,7 @@ import ConvierteTarifas from '../ConvierteTarifas/ConvierteTarifas';
 import FichasTecnicas from '../FichasTecnicas/FichasTecnicas';
 import Alergenos from '../Alergenos/Alergenos';
 import MisDatos from '../MisDatos/MisDatos';
+import RegisterUser from '../RegisterUser/RegisterUser';
 
 import './HomeScreen.css';
 
@@ -42,6 +43,8 @@ const HomeScreen = ({ user, onLogout }) => {
       case "openConvierteTarifas": return <ConvierteTarifas />;
       case "openFichasTecnicas": return <FichasTecnicas />;
       case "openAlergenos": return <Alergenos />;
+      case "openAltaUsuario": return <RegisterUser
+RegisterUser />;
       default:  return <Bienvenida />;
     }
   };

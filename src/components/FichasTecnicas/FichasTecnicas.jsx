@@ -24,8 +24,9 @@ const abrirNuevaPestana = (htmlContent) => {
   }
 };
 
-// const rutaOriginal = "D:/Nube/GitHub/Mallorquina_API/app/ficheros/imagen/alergenos/";
-const nuevaRuta = REACT_APP_ALERGENOS
+// const rutaOriginal = "D:/Nube/GitHub/Mallorquina_API/app/ficheros/imagen/alergenos/"; 
+const nuevaRuta = process.env.REACT_APP_ALERGENOS;
+
 
 
 // -----------------------------------------------------------------------------------
