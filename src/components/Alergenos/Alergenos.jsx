@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import html2pdf from 'html2pdf.js';
 import { fetchAlergenos } from '../../services/alergenos';
 import './Alergenos.css';
 
@@ -30,6 +31,33 @@ const Alergenos = () => {
   // const nuevaRuta = "http://localhost:3000/img/";   // http://localhost:3000/img/alergenos/Cacahuetes.ico
 
 
+
+
+// -----------------------------------------------------------------------------------
+// 📌 Llamar al servicio para abrir en html en un PDF
+// -----------------------------------------------------------------------------------  
+const descargarPDF = () => {
+  // 1. Crear un elemento DOM temporal
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = html; // tu variable con el HTML
+  document.body.appendChild(tempDiv);
+
+  // 2. Llamar a html2pdf
+  html2pdf()
+    .set({
+      margin: 0.5,
+      filename: 'alergenos.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    })
+    .from(tempDiv)
+    .save()
+    .then(() => {
+      // 3. Limpiar el elemento temporal
+      document.body.removeChild(tempDiv);
+    });
+};
 
   // -----------------------------------------------------------------------------------
   // 📌 Llamar al servicio para abrir en una nueva pestaña la lsita de alergenos
@@ -100,6 +128,9 @@ const Alergenos = () => {
                 {/* <button onClick={() => abrirNuevaPestana(resultados[1].replace(/D:\/Nube\/GitHub\/Mallorquina_API\/app\/ficheros\/imagen\//g, nuevaRuta))}> */}
                 <button onClick={() => abrirNuevaPestana(html)}>
                     Abrir en nueva pestaña
+                </button>
+                <button onClick={descargarPDF}>
+                    Descargar como PDF
                 </button>
               </div>
             ) : ( <p></p>         
