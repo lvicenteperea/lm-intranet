@@ -17,7 +17,6 @@ export const fetchSincroniza = async (tienda) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': '*/*',
                 "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
