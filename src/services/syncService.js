@@ -25,7 +25,8 @@ export const fetchSincroniza = async (tienda) => {
                 user: "usuario_dev",
                 ret_code: 0,
                 ret_txt: "Ok",
-                tienda:`${tienda}`
+                // tiendas:`${tienda}`
+                tiendas:[tienda]
             })
         });
 
