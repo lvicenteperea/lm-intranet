@@ -37,3 +37,29 @@
     font-weight: bold;
   }
   
+
+  .productos-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.productos-table th,
+.productos-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.productos-table th {
+  background: #f89aba;
+  color: white;
+}
+
+
+.tabla-scroll {
+  max-height: 700px;   /* O la altura que quieras */
+  overflow-y: auto;
+  border: 1px solid #eee;
+  margin-top: 12px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px #e0e0e0;
+}

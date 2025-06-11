@@ -14,7 +14,7 @@ export const fetchFichasTecnicas = async () => {
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/mll_fichas_tecnicas`, {
+    const response = await fetch(`${API_BASE_URL}/mll_genera_fichas_tecnicas`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +26,8 @@ export const fetchFichasTecnicas = async () => {
         ret_code: 0,
         ret_txt: "Ok",
         output_path: "",
-        punto_venta: 0
+        punto_venta: 0,
+        generar_ficheros: "N"
       })
     });
 
