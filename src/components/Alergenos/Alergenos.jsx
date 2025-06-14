@@ -4,7 +4,7 @@ import { fetchAlergenos } from '../../services/alergenos';
 import './Alergenos.css';
 
 const Alergenos = () => {
-  const [punto_venta, setPunto_venta] = useState(2); // entidad Velazquez por defecto
+  const [punto_venta, setPunto_venta] = useState("0"); // valor por defecto "0"
   const [resultados, setResultados] = useState(["Pulsa una opción"]);
   const [texto, setTexto] = useState("");
   const [html, setHtml] = useState("");
