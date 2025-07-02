@@ -11,23 +11,40 @@ const ConvierteTarifas = () => {
   const [resultados, setResultados] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [codigos, setCodigos] = useState('');
+  const [codigosError, setCodigosError] = useState('');
 
   // -----------------------------------------------------------------------------------
   // ✅ CONVERTIR 
   // -----------------------------------------------------------------------------------
   const handleConversion = async () => {
     setLoading(true);
-    setError('');
+  setError('');
+  setCodigosError('');
 
-    const response = await fetchConvierteTarifas();
+  // Valida la lista de códigos: solo números, separados por comas
+  const codigosLimpios = codigos.split(',')
+    .map(c => c.trim())
+    .filter(Boolean);
+
+  // Por ejemplo: solo números, sin letras, sin espacios extra
+  const regex = /^\d+$/;
+  if (codigosLimpios.length === 0 || !codigosLimpios.every(c => regex.test(c))) {
     setLoading(false);
+    setCodigosError('Por favor, introduce una lista válida de códigos numéricos separados por comas.');
+    return;
+  }
 
-    if (response.success) {
-      setResultados(response.resultados);
-    } else {
-      setError(response.message);
-    }
-  };
+  // ... Aquí tu llamada al servicio, pasando codigosLimpios si lo necesitas
+  const response = await fetchConvierteTarifas(codigosLimpios);
+  setLoading(false);
+
+  if (response.success) {
+    setResultados(response.resultados);
+  } else {
+    setError(response.message);
+  }
+};
 
   // -----------------------------------------------------------------------------------
   // ✅ DESCARGAR
@@ -76,6 +93,20 @@ const ConvierteTarifas = () => {
   // -----------------------------------------------------------------------------------
   return (
     <div className="convierte-container">
+
+      <div className="input-codigos">
+        <label>Introduce los códigos (separados por comas):</label>
+        <input
+          type="text"
+          value={codigos}
+          onChange={(e) => setCodigos(e.target.value)}
+          placeholder="Ej: 12345,67890,54321"
+          style={{ width: '100%' }}
+        />
+        {codigosError && <div className="error">{codigosError}</div>}
+      </div>
+
+
       <h2>Conversión de Tarifas</h2>
       <button onClick={handleConversion} disabled={loading}>
         {loading ? "Convirtiendo..." : "Convertir Tarifas"}

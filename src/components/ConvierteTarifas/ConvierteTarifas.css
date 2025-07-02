@@ -97,3 +97,13 @@
 .download-btn:hover {
   background-color: #d6788a;
 }
+
+.input-codigos {
+  margin-bottom: 12px;
+}
+
+.input-codigos .error {
+  color: #f00;
+  font-size: 0.9em;
+  margin-top: 4px;
+}

@@ -3,7 +3,7 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL_MLL
 // -----------------------------------------------------------------------------------
 // 📌 Llamar al servicio para CONVERTIR TARIFAS
 // -----------------------------------------------------------------------------------
-export const fetchConvierteTarifas = async () => {
+export const fetchConvierteTarifas = async (listaCodigosLimpios) => {
     console.log(`📡 Enviando solicitud a la API para convertir tarifas...`);
   
     const token = localStorage.getItem("token"); // Obtener el token
@@ -24,13 +24,14 @@ export const fetchConvierteTarifas = async () => {
           id_App: 1,
           user: "usuario_dev",
           ret_code: 0,
-          ret_txt: "Ok"
+          ret_txt: "Ok",
+          codigos: listaCodigosLimpios
         })
       });
   
       console.log("📡 Respuesta recibida:", response);
   
-      if (!response.ok) {
+      if (!response.ok) { 
         const errorText = await response.text();
         console.error(`❌ Error en la conversión de tarifas: HTTP ${response.status}`, errorText);
         return { success: false, message: `Error HTTP ${response.status}: ${errorText}` };
