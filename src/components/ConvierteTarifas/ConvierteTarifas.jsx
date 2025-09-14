@@ -28,11 +28,13 @@ const ConvierteTarifas = () => {
     .filter(Boolean);
 
   // Por ejemplo: solo números, sin letras, sin espacios extra
-  const regex = /^\d+$/;
-  if (codigosLimpios.length === 0 || !codigosLimpios.every(c => regex.test(c))) {
-    setLoading(false);
-    setCodigosError('Por favor, introduce una lista válida de códigos numéricos separados por comas.');
-    return;
+  if (codigosLimpios.length > 0) {
+    const regex = /^\d+$/;
+    if (!codigosLimpios.every(c => regex.test(c))) {
+      setLoading(false);
+      setCodigosError('Por favor, introduce una lista válida de códigos numéricos separados por comas.');
+      return;
+    }
   }
 
   // ... Aquí tu llamada al servicio, pasando codigosLimpios si lo necesitas
